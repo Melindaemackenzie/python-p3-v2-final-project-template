@@ -1,4 +1,4 @@
-from __init__ import CURSOR, CONN
+from models.__init__ import CURSOR, CONN
 
 class Runner:
 
@@ -101,4 +101,7 @@ class Runner:
         CONN.commit()
 
         self.id = CURSOR.lastrowid
+        Runner.all[self.id] = self
+
+        
 
