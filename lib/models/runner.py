@@ -35,7 +35,7 @@ class Runner:
     
     @age.setter
     def age(self, age):
-        if isinstance(age, int) and len(age):
+        if isinstance(age, int) and age is not None:
             self._age = age
         else:
             raise ValueError(
@@ -103,5 +103,81 @@ class Runner:
         self.id = CURSOR.lastrowid
         Runner.all[self.id] = self
 
+    @classmethod
+    def create(cls, name, age, gender, race_id):
+        runner = cls(name, age, gender, race_id)
+        runner.save()
+        return runner
+    
+    def update(self):
+        sql = """
+            UPDATE runners
+            SET name = ?, age = ?, gender = ?, race_id =?
+            WHERE id = ?
+        """
+
+        CURSOR.execute(sql, (self.name, self.age, self.gender, self.race_id, self.id))
+        CONN.commit()
+
+    def delete(self):
+        sql = """
+            DELETE FROM runners 
+            WHERE id = ?
+        """
+
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+
+        del Runner.all[self.id]
+        self.id =  None
         
+    @classmethod
+    def instance_from_db(cls,row):
+        runner = cls.all.get(row[0])
+
+        if runner:
+            runner.name = row[1]
+            runner.age = row[2]
+            runner.gender = row[3]
+            runner.race_id = row[4]
+        else:
+            runner = cls(row [1], row[2], row[3], row[4])
+            runner.id = row[0]
+            cls.all[runner.id] = runner
+        return runner
+    
+    @classmethod
+    def get_all(cls):
+        sql = """
+            SELECT * FROM runners
+        """
+
+        rows = CURSOR.execute(sql).fetchall()
+
+        return [cls.instance_from_db(row) for row in rows]
+    
+    @classmethod
+    def find_by_id(cls, id):
+        sql = """
+            SELECT *
+            FROM runners
+            WHERE id = ?
+        """
+
+        row = CURSOR.execute(sql, (id,)).fetchone()
+
+        return cls.instance_from_db(row) if row else None
+        
+
+    @classmethod
+    def find_by_name(cls, name):
+        sql = """
+            SELECT *
+            FROM runners
+            WHERE name = ?
+        """
+
+        row = CURSOR.execute(sql, (name,)).fetchone()
+
+        return cls.instance_from_db(row) if row else None
 
