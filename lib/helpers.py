@@ -17,9 +17,9 @@ def exit_program():
 def add_athlete():
     print('')
     name = input('Enter athlete name:  ')
-    age = input('Enter athlete age:  ')
+    age = int(input('Enter athlete age:  '))
     gender = input('Enter gender; M or F:  ')
-    race_id = input('Enter the race:  ')
+    race_id = int(input('Enter the race:  '))
     try:
         athlete = Athlete.create(name, age, gender, race_id)
         print(athlete) if athlete else None
