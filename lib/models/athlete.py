@@ -1,6 +1,6 @@
 from models.__init__ import CURSOR, CONN
 
-class Runner:
+class Athlete:
 
     all = {}
 
@@ -12,7 +12,7 @@ class Runner:
         self.race_id = race_id
 
     def __repr__(self):
-        return f"<Runner {self.id}: {self.name}: {self.age}: {self.gender} - {self.race_id}>"
+        return f"<Athlete {self.id}: {self.name}: {self.age}: {self.gender} - {self.race_id}>"
         
        
 
@@ -70,14 +70,15 @@ class Runner:
         
     @classmethod
     def create_table(cls):
-        """ Create a new table to persist the attributes of Runner instances """
+        """ Create a new table to persist the attributes of Athlete instances """
         sql = """
-            CREATE TABLE IF NOT EXISTS runners (
+            CREATE TABLE IF NOT EXISTS athletes (
             id INTEGER PRIMARY KEY,
             name TEXT,
             age INTEGER,
             gender TEXT,
-            race_id INTEGER
+            race_id INTEGER,
+            FOREIGN KEY (race_id) REFERENCES races(id))
             )
         """
         CURSOR.execute(sql)
@@ -86,14 +87,14 @@ class Runner:
     @classmethod
     def drop_table(cls):
         sql = """
-            DROP TABLE IF EXISTS runners 
+            DROP TABLE IF EXISTS athletes 
         """
         CURSOR.execute(sql)
         CONN.commit()
 
     def save(self):
         sql = """
-            INSERT INTO runners (name, age, gender, race_id)
+            INSERT INTO athletes (name, age, gender, race_id)
             VALUES (?, ?, ?, ?)
         """
 
@@ -101,17 +102,17 @@ class Runner:
         CONN.commit()
 
         self.id = CURSOR.lastrowid
-        Runner.all[self.id] = self
+        Athlete.all[self.id] = self
 
     @classmethod
     def create(cls, name, age, gender, race_id):
-        runner = cls(name, age, gender, race_id)
-        runner.save()
-        return runner
+        athlete = cls(name, age, gender, race_id)
+        athlete.save()
+        return athlete
     
     def update(self):
         sql = """
-            UPDATE runners
+            UPDATE athletes
             SET name = ?, age = ?, gender = ?, race_id =?
             WHERE id = ?
         """
@@ -121,35 +122,35 @@ class Runner:
 
     def delete(self):
         sql = """
-            DELETE FROM runners 
+            DELETE FROM athletes
             WHERE id = ?
         """
 
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
 
-        del Runner.all[self.id]
+        del Athlete.all[self.id]
         self.id =  None
         
     @classmethod
     def instance_from_db(cls,row):
-        runner = cls.all.get(row[0])
+        athlete = cls.all.get(row[0])
 
-        if runner:
-            runner.name = row[1]
-            runner.age = row[2]
-            runner.gender = row[3]
-            runner.race_id = row[4]
+        if athlete:
+            athlete.name = row[1]
+            athlete.age = row[2]
+            athlete.gender = row[3]
+            athlete.race_id = row[4]
         else:
-            runner = cls(row [1], row[2], row[3], row[4])
-            runner.id = row[0]
-            cls.all[runner.id] = runner
-        return runner
+            athlete = cls(row [1], row[2], row[3], row[4])
+            athlete.id = row[0]
+            cls.all[athlete.id] = athlete
+        return athlete
     
     @classmethod
     def get_all(cls):
         sql = """
-            SELECT * FROM runners
+            SELECT * FROM athletes
         """
 
         rows = CURSOR.execute(sql).fetchall()
@@ -160,7 +161,7 @@ class Runner:
     def find_by_id(cls, id):
         sql = """
             SELECT *
-            FROM runners
+            FROM athletes
             WHERE id = ?
         """
 
@@ -173,7 +174,7 @@ class Runner:
     def find_by_name(cls, name):
         sql = """
             SELECT *
-            FROM runners
+            FROM athletes
             WHERE name = ?
         """
 

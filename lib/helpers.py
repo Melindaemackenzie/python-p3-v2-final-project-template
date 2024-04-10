@@ -18,7 +18,10 @@ def find_runner_by_id():
     pass
 
 
-def add_race():
+def view_all_races():
+    pass
+
+def view_runners_in_race():
     pass
 
 def delete_runner():
