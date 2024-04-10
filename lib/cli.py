@@ -6,6 +6,7 @@ from models.race import Race
 from helpers import (
     exit_program,
     view_all_athletes,
+    view_athletes_in_race,
     view_all_races,
     find_athlete_by_name,
     add_athlete,
@@ -59,46 +60,46 @@ class Main():
             else:
                 print('Invalid choice. Please select another.')
 
-        def athlete_management(self):
-            while True:
-                self.display_athlete_menu()
-                choice = input('Enter choice: ')
-                if choice == '1':
-                    view_all_athletes()
-                elif choice == '2':
-                    update_athlete()
-                elif choice == '3':
-                    add_athlete()
-                elif choice == '4':
-                    delete_athlete()
-                elif choice == '5':
-                    find_athlete_by_name()
-                elif choice == '6':
+    def athlete_management(self):
+         while True:
+            self.display_athlete_menu()
+            choice = input('Enter choice: ')
+            if choice == '1':
+                view_all_athletes()
+            elif choice == '2':
+                update_athlete()
+            elif choice == '3':
+                add_athlete()
+            elif choice == '4':
+                delete_athlete()
+            elif choice == '5':
+                find_athlete_by_name()
+            elif choice == '6':
+                break
+            else:
+                print('Invalid choice, try again.')
+
+    def race_management(self):
+        while True:
+            self.display_race_menu()
+            choice = input('Enter choice:  ')
+            if choice == '1':
+                view_all_races()
+            elif choice == '2':
+                update_race()
+            elif choice == '3':
+                add_race()
+            elif choice == '4':
+                delete_race()
+            elif choice == '5':
+                find_race_by_type()
+            elif choice == '6':
+                view_athletes_in_race
+            elif choice == '7':
+
                     break
-                else:
-                    print('Invalid choice, try again.')
-
-            def race_management(self):
-                while True:
-                    self.display_race_menu()
-                    choice = input('Enter choice:  ')
-                    if choice == '1':
-                        view_all_races()
-                    elif choice == '2':
-                        update_race()
-                    elif choice == '3':
-                        add_race()
-                    elif choice == '4':
-                        delete_race()
-                    elif choice == '5':
-                        find_race_by_type()
-                    elif choice == '6':
-                        view_all_athletes_in_race
-                    elif choice == '7':
-
-                        break
-                    else:
-                        print ('Invalid choice, try again.')
+            else:
+                    print ('Invalid choice, try again.')
 
   
 

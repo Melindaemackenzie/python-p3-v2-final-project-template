@@ -4,7 +4,10 @@ from models.athlete import Athlete
 from models.race import Race
 
 def view_all_athletes():
-    print("View All Runners")
+    print('')
+    athletes = Athlete.get_all()
+    for athlete in athletes:
+        print(athlete)
 
 
 def exit_program():
@@ -14,7 +17,7 @@ def exit_program():
 def add_athlete():
     print('')
     name = input('Enter athlete name:  ')
-    age = input('Enter athlet age:  ')
+    age = input('Enter athlete age:  ')
     gender = input('Enter gender; M or F:  ')
     race_id = input('Enter the race:  ')
     try:

@@ -78,7 +78,7 @@ class Athlete:
             age INTEGER,
             gender TEXT,
             race_id INTEGER,
-            FOREIGN KEY (race_id) REFERENCES races(id))
+            FOREIGN KEY (race_id) REFERENCES races(id)
             )
         """
         CURSOR.execute(sql)

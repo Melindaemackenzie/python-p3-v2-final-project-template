@@ -1,5 +1,6 @@
 from models.__init__ import CURSOR, CONN
 
+
 class Race:
 
     all = {}
@@ -33,7 +34,7 @@ class Race:
             DROP TABLE IF EXISTS races
         """
 
-        CURSOR.execut(sql)
+        CURSOR.execute(sql)
         CONN.commit()
 
     def save(self):
@@ -44,7 +45,7 @@ class Race:
                 INSERT INTO races (name, race_type, distance)
                 VALUES (?, ?, ?)
             """
-            CURSOR.execute(sql, (self.name, self.race_id, self.distance))
+            CURSOR.execute(sql, (self.name, self.race_type, self.distance))
             CONN.commit()
             # Update the instance with the assigned ID
             self.id = CURSOR.lastrowid
@@ -52,7 +53,7 @@ class Race:
             # Update an existing row in the races table
             sql = """
                 UPDATE races
-                SET name = ?, race_id = ?, distance = ?
+                SET name = ?, race_type = ?, distance = ?
                 WHERE id = ?
             """
             CURSOR.execute(sql, (self.name, self.race_type, self.distance, self.id))
