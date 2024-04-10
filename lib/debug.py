@@ -3,7 +3,17 @@
 
 from models.__init__ import CONN, CURSOR
 from models.athlete import Athlete
-import ipdb
+from models.race import Race
+import ipdb;
+
+def reset_database():
+    Athlete.drop_table()
+    Athlete.create_table()
+    Race.drop_table()
+    Race.create_table()
+
+reset_database()
+
 
 
 jane = Athlete("Jane", 33, "F", 1)

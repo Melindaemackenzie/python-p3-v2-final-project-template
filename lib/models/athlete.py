@@ -85,6 +85,17 @@ class Athlete:
         CONN.commit()
 
     @classmethod
+    def rename_table(cls, new_name):
+        """ Rename the athletes table """
+        sql = f"""
+            ALTER TABLE runners RENAME TO {new_name}
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
+        
+
+    @classmethod
     def drop_table(cls):
         sql = """
             DROP TABLE IF EXISTS athletes 

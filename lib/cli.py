@@ -1,60 +1,107 @@
 # lib/cli.py
 
+from models.athlete import Athlete
+from models.race import Race
+
 from helpers import (
     exit_program,
-    view_all_runners,
+    view_all_athletes,
     view_all_races,
-    find_runner_by_id,
-    add_runner,
+    find_athlete_by_name,
+    add_athlete,
     add_race,
-    delete_runner,
+    delete_athlete,
     delete_race,
-    find_race_by_distance,
-    find_runner_by_gender
+    find_race_by_type,
+    update_athlete,
+    update_race
 )
 
 
-def main():
-    while True:
-        menu()
-        choice = input("> ")
-        if choice == "0":
-            exit_program()
-        elif choice == "1":
-            view_all_runners()
-        elif choice == "2":
-            view_all_races()
-        elif choice == "3":
-            find_runner_by_id()
-        elif choice == "4":
-            add_runner()
-        elif choice == "5":
-            add_race()
-        elif choice == "6":
-            delete_runner()
-        elif choice == "7":
-            delete_race()
-        elif choice == "8":
-            find_race_by_distance()
-        elif choice == "9":
-            find_runner_by_gender()
-        else:
-            print("Invalid choice")
+class Main():
 
+    def display_main_menu(self):
+        print('\nEvent Manager')
+        print('1. Manage Athletes')
+        print('2. Manage Races')
+        print('3. Quit')
 
-def menu():
-    print("Please select an option:")
-    print("0. Exit the program")
-    print("1. View all runners")
-    print("2. View all races")
-    print("3. Find Runner By ID")
-    print("4. Add runner")
-    print("5. Add race")
-    print("6. Delete runner")
-    print("7. Delete race")
-    print("8. Find race by distance")
-    print("9. Find runner by gender")
+    def display_athlete_menu(self):
+        print('\n Athlete Management Menu')
+        print('1.View all athletes')
+        print('2. Update an athlete')
+        print('3. Add an athlete')
+        print('4. Remove athlete')
+        print('5. Find athlete by name')
+        print('6. Back to Event Manager Menu')
 
+    def display_race_menu(self):
+        print('\nRace Management Menu')
+        print('1. View all races')
+        print('2. Update a race')
+        print('3. Add a race')
+        print('4. Remove a race')
+        print('5. Find race by type')
+        print('6. View all athletes in race')
+        print('7. Exit back to Event Manager Menu')
+
+    def run(self):
+        while True:
+            self.display_main_menu()
+            choice = input('Enter choice: ')
+            if choice == '1':
+                self.athlete_management()
+            elif choice == '2':
+                self.race_management()
+            elif choice == '3':
+                print('Exiting event manager..')
+                exit_program()
+            else:
+                print('Invalid choice. Please select another.')
+
+        def athlete_management(self):
+            while True:
+                self.display_athlete_menu()
+                choice = input('Enter choice: ')
+                if choice == '1':
+                    view_all_athletes()
+                elif choice == '2':
+                    update_athlete()
+                elif choice == '3':
+                    add_athlete()
+                elif choice == '4':
+                    delete_athlete()
+                elif choice == '5':
+                    find_athlete_by_name()
+                elif choice == '6':
+                    break
+                else:
+                    print('Invalid choice, try again.')
+
+            def race_management(self):
+                while True:
+                    self.display_race_menu()
+                    choice = input('Enter choice:  ')
+                    if choice == '1':
+                        view_all_races()
+                    elif choice == '2':
+                        update_race()
+                    elif choice == '3':
+                        add_race()
+                    elif choice == '4':
+                        delete_race()
+                    elif choice == '5':
+                        find_race_by_type()
+                    elif choice == '6':
+                        view_all_athletes_in_race
+                    elif choice == '7':
+
+                        break
+                    else:
+                        print ('Invalid choice, try again.')
+
+  
 
 if __name__ == "__main__":
-    main()
+    cli = Main()
+    cli.run()

@@ -130,5 +130,13 @@ class Race:
         return cls.instance_from_db(row) if row else None
     
     def athletes(self):
-        pass
+        from models.athlete import Athlete
+        sql = '''
+            SELECT * FROM athletes
+            WHERE race_id = ?
+        '''
+
+        rows = CURSOR.execute(sql, (self.id, )).fetchall()
+
+        return [Athlete.instance_from_db(row) for row in rows]
 
