@@ -159,12 +159,13 @@ class Athlete:
         return athlete
     
     @classmethod
-    def get_all(cls):
+    def get_all(cls, race_id):
         sql = """
             SELECT * FROM athletes
+            WHERE race_id = ?
         """
 
-        rows = CURSOR.execute(sql).fetchall()
+        rows = CURSOR.execute(sql, (race_id)).fetchall()
 
         return [cls.instance_from_db(row) for row in rows]
     

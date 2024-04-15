@@ -94,7 +94,7 @@ class Main():
             elif choice == '5':
                 find_race_by_type()
             elif choice == '6':
-                view_athletes_in_race
+                view_athletes_in_race()
             elif choice == '7':
 
                     break
