@@ -127,8 +127,12 @@ class Race:
             WHERE race_type = ?
         """
 
-        row = CURSOR.execute(sql, (race_type,)).fetchone()
-        return cls.instance_from_db(row) if row else None
+        rows = CURSOR.execute(sql, (race_type,)).fetchall()
+
+        races = []
+        for row in rows:
+            races.append(cls.instance_from_db(row))
+        return races 
     
     def athletes(self):
         from models.athlete import Athlete
