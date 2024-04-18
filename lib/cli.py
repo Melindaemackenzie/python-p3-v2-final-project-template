@@ -69,6 +69,7 @@ class Main():
             elif choice == '2':
                 update_athlete()
             elif choice == '3':
+                view_all_races()
                 add_athlete()
             elif choice == '4':
                 delete_athlete()
@@ -94,6 +95,7 @@ class Main():
             elif choice == '5':
                 find_race_by_type()
             elif choice == '6':
+                view_all_races()
                 view_athletes_in_race()
             elif choice == '7':
 

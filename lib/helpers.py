@@ -16,15 +16,28 @@ def exit_program():
 
 def add_athlete():
     print('')
-    name = input('Enter athlete name:  ')
-    age = int(input('Enter athlete age:  '))
-    gender = input('Enter gender; M or F:  ')
-    race_id = int(input('Enter the race:  '))
     try:
-        athlete = Athlete.create(name, age, gender, race_id)
-        print(athlete) if athlete else None
+        race_name = input("Enter the name of the race to add the athlete to: ")
+        race = Race.find_by_name(race_name)
+        if race:
+            name = input('Enter athlete name:  ')
+            age = int(input('Enter athlete age:  '))
+            gender = input('Enter gender; M or F:  ')
+            athlete = Athlete.create(name, age, gender, race.id)
+            if athlete:
+                print(f'Athlete {athlete.name} succesfully added to race {race.name}.')
+            else:
+                print('Failed to add athlete')
+        else:
+            print('Race not found. Please enter a valid race name')
+    except ValueError as ve:
+        print('Error: Invalid input. Please enter a valid age')
     except Exception as exc:
-        print ('Error adding athlete:  ', exc)
+        print('Error adding athlete:', exc)
+       # athlete = Athlete.create(name, age, gender, race_id)
+       # print(athlete) if athlete else None
+    #except Exception as exc:
+        #print ('Error adding athlete:  ', exc)
 
 def add_race():
     print('')
@@ -56,14 +69,20 @@ def view_all_races():
 
 def view_athletes_in_race():
     print('')
-    race_id = input("Enter the ID of the race: ")
-    athletes = Athlete.get_all(race_id)
-    if athletes:
-        print(f"Athletes participating in race with ID {race_id}:")
-        for athlete in athletes:
-            print(athlete)
+    race_name = input("Enter the name of the race: ")
+    race = Race.find_by_name(race_name)
+    
+    if race:
+        athletes = Athlete.get_all(race.id)
+        if athletes:
+            print(f"Athletes participating in race {race_name}:")
+            for athlete in athletes:
+                print(athlete)
+        else:
+            print("No athletes found for the specified race.")
     else:
-        print("No athletes found for the specified race.")
+        print(f"No race found with the name '{race_name}.")
+        print("If you'd like to add a race, select '3'.")
 
 
 def delete_athlete():

@@ -170,7 +170,7 @@ class Athlete:
                 SELECT * FROM athletes
                 WHERE race_id = ?
             """
-            rows = CURSOR.execute(sql, (race_id)).fetchall()
+            rows = CURSOR.execute(sql, (race_id,)).fetchall()
 
         return [cls.instance_from_db(row) for row in rows]
     

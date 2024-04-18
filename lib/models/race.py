@@ -121,6 +121,21 @@ class Race:
         return cls.instance_from_db(row) if row else None
     
     @classmethod
+    def find_by_name(cls, name):
+        """Find a race by its name."""
+        sql = """
+            SELECT *
+            FROM races
+            WHERE name = ?
+        """
+        row = CURSOR.execute(sql, (name,)).fetchone()
+        if row:
+
+            return cls.instance_from_db(row) 
+        else:
+            return None
+    
+    @classmethod
     def find_by_race_type(cls, race_type):
         sql = """
             SELECT *
