@@ -103,19 +103,18 @@ def update_athlete():
         try:
             name = input('Enter the athlete new name: ')
             athlete.name = name
-            age = input('Enter the athlete age: ')
+            age = (int(input('Enter the athlete age: ')))
             athlete.age = age
             gender = input('Enter the athlete gender; M or F: ')
             athlete.gender = gender
-            athlete_id = input("Enter the athlete new ID: ")
-            athlete.id = athlete_id
+
 
             athlete.update()
             print(f'Success: {athlete}')
         except Exception as exc:
             print('Error updating athlete: ',exc)
-        else:
-            print(f'Athlete {id_} not found')
+    else:
+        print(f'Athlete {id_} not found')
 
 def update_race():
         print('')
