@@ -4,7 +4,7 @@ class Athlete:
 
     all = {}
 
-    def __init__(self, name, age, gender, race_id, id=None):
+    def __init__(self, name, age, gender, race_id=None, id=None):
         self.id = id
         self.name = name
         self.age = age
@@ -159,13 +159,18 @@ class Athlete:
         return athlete
     
     @classmethod
-    def get_all(cls, race_id):
-        sql = """
-            SELECT * FROM athletes
-            WHERE race_id = ?
-        """
-
-        rows = CURSOR.execute(sql, (race_id)).fetchall()
+    def get_all(cls, race_id=None):
+        if race_id is None:
+            sql = """
+                SELECT * FROM athletes
+            """
+            rows = CURSOR.execute(sql).fetchall()
+        else:
+            sql = """
+                SELECT * FROM athletes
+                WHERE race_id = ?
+            """
+            rows = CURSOR.execute(sql, (race_id)).fetchall()
 
         return [cls.instance_from_db(row) for row in rows]
     

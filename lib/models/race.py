@@ -5,11 +5,12 @@ class Race:
 
     all = {}
 
-    def __init__(self, name, race_type, distance, id=None):
+    def __init__(self, name, race_type, distance,  id=None):
         self.id = id
         self.name = name
         self.race_type = race_type
         self.distance = distance
+   
 
     def __repr__(self):
         return f'<Race {self.id}: {self.name}, {self.race_type}, {self.distance}>'
@@ -133,6 +134,8 @@ class Race:
         for row in rows:
             races.append(cls.instance_from_db(row))
         return races 
+    
+    
     
     def athletes(self):
         from models.athlete import Athlete
