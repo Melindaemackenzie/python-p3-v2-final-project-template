@@ -1,4 +1,5 @@
 from models.__init__ import CURSOR, CONN
+from models.race import Race
 
 class Athlete:
 
@@ -12,7 +13,7 @@ class Athlete:
         self.race_id = race_id
 
     def __repr__(self):
-        return f"<Athlete {self.id}: {self.name}: {self.age}: {self.gender} - {self.race_id}>"
+        return f"<Athlete {self.id}: {self.name}: {self.age}: {self.gender} - {self.race_name}>"
         
        
 
@@ -151,10 +152,14 @@ class Athlete:
             athlete.name = row[1]
             athlete.age = row[2]
             athlete.gender = row[3]
+            race_name = Race.find_by_id(row[4]).name
             athlete.race_id = row[4]
+            athlete.race_name = race_name
         else:
             athlete = cls(row [1], row[2], row[3], row[4])
             athlete.id = row[0]
+            race_name = Race.find_by_id(row[4]).name
+            athlete.race_name = race_name
             cls.all[athlete.id] = athlete
         return athlete
     

@@ -90,6 +90,7 @@ class Main():
             if choice == '1':
                 view_all_races()
             elif choice == '2':
+                view_all_races()
                 update_race()
             elif choice == '3':
                 add_race()

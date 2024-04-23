@@ -115,7 +115,7 @@ class Race:
             WHERE id = ?
         """
 
-        CURSOR.execute (sql, (self.name, self.race_type, self.distance))
+        CURSOR.execute (sql, (self.name, self.race_type, self.distance, self.id))
         CONN.commit()
 
 

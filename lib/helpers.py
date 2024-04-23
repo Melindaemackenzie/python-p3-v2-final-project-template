@@ -129,6 +129,17 @@ def update_athlete():
             athlete.age = age
             gender = input('Enter the athlete gender; M or F: ')
             athlete.gender = gender
+            new_race_name = input('Enter the athlete race name: ')
+            new_race = Race.find_by_name(new_race_name)
+            if new_race:
+                athlete.race_id=new_race.id
+            else:
+                print(f'Race {new_race_name} not found.')
+                return
+            
+            
+            
+
 
 
             athlete.update()
@@ -140,11 +151,11 @@ def update_athlete():
 
 def update_race():
         print('')
-        id_= input("Enter the race id: ")
-        if race := Race.find_by_id(id_):
+        name= input("Enter the race name: ")
+        if race := Race.find_by_name(name):
             try:
-                name = input('Enter the race new name: ')
-                race.name = name
+                new_name = input('Enter the race new name: ')
+                race.name = new_name
                 race_type = input('Enter the race type; run, bike, or swim: ')
                 race.race_type = race_type
                 distance = float(input('Enter the race distance in miles: '))
@@ -155,5 +166,5 @@ def update_race():
                 print(f'Success: {race}')
             except Exception as exc:
                 print('Error updating race: ',exc)
-            else:
-                print(f'Race {id_} not found')
+        else:
+            print(f'Race {name} not found')
