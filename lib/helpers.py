@@ -43,7 +43,7 @@ def add_race():
     print('')
     name = input('Enter race name:  ')
     race_type = input ('Enter race type; bike, run, swim:  ')
-    distance = input('Enter race distance in miles:  ')
+    distance = float(input('Enter race distance in miles:  '))
     try:
         race = Race.create(name, race_type, distance)
         print(race) if race else None
@@ -87,22 +87,24 @@ def view_athletes_in_race():
 
 def delete_athlete():
     print('')
-    id_= input("Enter the athlete's id: ")
-    if athlete := Athlete.find_by_id(id_):
+    name= input("Enter the athlete's name: ")
+    athlete = Athlete.find_by_name(name)
+    if athlete:
         athlete.delete()
-        print(f'Athlete {id_} deleted')
+        print(f'Athlete {name} deleted')
     else:
-        print(f'Athlete {id_} not found')
+        print(f'Athlete {name} not found')
     
 
 def delete_race():
     print('')
-    id_= input("Enter the race id: ")
-    if race := Race.find_by_id(id_):
+    name= input("Enter the race name: ")
+    race = Race.find_by_name(name)
+    if race:
         race.delete()
-        print(f'Race {id_} deleted')
+        print(f'Race {name} deleted')
     else:
-        print(f'Race {id_} not found')
+        print(f'Race {name} not found')
     
 def find_race_by_type():
     print('')
@@ -117,11 +119,12 @@ def find_race_by_type():
 
 def update_athlete():
     print('')
-    id_= input("Enter the athlete id: ")
-    if athlete := Athlete.find_by_id(id_):
+    name = input("Enter the athlete name: ")
+    athlete = Athlete.find_by_name(name)
+    if athlete:
         try:
-            name = input('Enter the athlete new name: ')
-            athlete.name = name
+            new_name = input('Enter the athlete new name: ')
+            athlete.name = new_name
             age = (int(input('Enter the athlete age: ')))
             athlete.age = age
             gender = input('Enter the athlete gender; M or F: ')
@@ -133,7 +136,7 @@ def update_athlete():
         except Exception as exc:
             print('Error updating athlete: ',exc)
     else:
-        print(f'Athlete {id_} not found')
+        print(f'Athlete {name} not found')
 
 def update_race():
         print('')
@@ -144,7 +147,7 @@ def update_race():
                 race.name = name
                 race_type = input('Enter the race type; run, bike, or swim: ')
                 race.race_type = race_type
-                distance = input('Enter the race distance in miles: ')
+                distance = float(input('Enter the race distance in miles: '))
                 race.distance = distance
                 
 

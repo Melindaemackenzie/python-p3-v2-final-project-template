@@ -15,6 +15,46 @@ class Race:
     def __repr__(self):
         return f'<Race {self.id}: {self.name}, {self.race_type}, {self.distance}>'
 
+
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, name):
+        if isinstance(name, str) and len(name):
+            self._name = name
+        else:
+            raise ValueError(
+                "Name must be a non-empty string"
+            )
+        
+    @property
+    def race_type(self):
+        return self._race_type
+    
+    @race_type.setter
+    def race_type(self, race_type):
+        if isinstance(race_type, str) and race_type.lower() in {"run", "bike", "swim"}:
+            self._race_type = race_type.lower()
+        else:
+            raise ValueError(
+                "Race type must be a string and one of 'run', 'bike', 'swim' "
+            )
+        
+    @property
+    def distance(self):
+        return self._distance
+    
+    @distance.setter
+    def distance(self, distance):
+        if isinstance(distance, (int, float)) and distance > 0:
+            self._distance = distance
+        else:
+            raise ValueError(
+                "Distance must be a postiive integer or float in miles"
+            )
+        
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of Race instances """

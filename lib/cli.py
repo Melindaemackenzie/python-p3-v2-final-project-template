@@ -67,11 +67,14 @@ class Main():
             if choice == '1':
                 view_all_athletes()
             elif choice == '2':
+                view_all_athletes()
                 update_athlete()
             elif choice == '3':
                 view_all_races()
+                print('If race does not exist, add race in Race Management Menu')
                 add_athlete()
             elif choice == '4':
+                view_all_athletes()
                 delete_athlete()
             elif choice == '5':
                 find_athlete_by_name()
@@ -91,6 +94,7 @@ class Main():
             elif choice == '3':
                 add_race()
             elif choice == '4':
+                view_all_races()
                 delete_race()
             elif choice == '5':
                 find_race_by_type()
