@@ -1,18 +1,20 @@
-# Phase 3 CLI+ORM Project Template
+# EVENT MANAGER READEME
 
-## Learning Goals
+INTRO
 
-- Discuss the basic directory structure of a CLI.
-- Outline the first steps in building a CLI.
+'EVENT MANAGER' is a Python CLI application created to manage various athletic events and participating athletes. 
 
----
+USE
 
-## Introduction
+Users are able to interact with the DB of athletes and events, creating events, and athletes as well as updating 
+exisiting athletes and events. At this time, athletes are only able to participate in one athletic event. Type 
+and distance of event will be listed along with name. Users are able to do view all athletes, search by name, 
+update, add, and remove athletes. Users are also able to view all races, search race by type, view all athletes 
+in specific race, update, add, and remove a race. 
 
-You now have a basic idea of what constitutes a CLI. Fork and clone this lesson
-for a project template for your CLI.
+BRIEF WALK THROUGH
 
-Take a look at the directory structure:
+Directory structure is as follows:
 
 ```console
 .
@@ -22,110 +24,29 @@ Take a look at the directory structure:
 └── lib
     ├── models
     │   ├── __init__.py
-    │   └── model_1.py
+    │   └── athlete.py
+    │   └── race.py
     ├── cli.py
     ├── debug.py
     └── helpers.py
+    └── seed.py
+    
 ```
 
-Note: The directory also includes two files named `CONTRIBUTING.md` and
-`LICENSE.md` that are specific to Flatiron's curriculum. You can disregard or
-delete the files if you want.
 
----
-
-## Generating Your Environment
-
-You might have noticed in the file structure- there's already a Pipfile!
-
-Install any additional dependencies you know you'll need for your project by
-adding them to the `Pipfile`. Then run the commands:
-
-```console
-pipenv install
-pipenv shell
-```
-
----
-
-## Generating Your CLI
-
-A CLI is, simply put, an interactive script and prompts the user and performs
-operations based on user input.
-
-The project template has a sample CLI in `lib/cli.py` that looks like this:
-
-```py
-# lib/cli.py
-
-from helpers import (
-    exit_program,
-    helper_1
-)
+Upon opening the CLI, users will be greeted with a simple "main menu"
 
 
-def main():
-    while True:
-        menu()
-        choice = input("> ")
-        if choice == "0":
-            exit_program()
-        elif choice == "1":
-            helper_1()
-        else:
-            print("Invalid choice")
 
 
-def menu():
-    print("Please select an option:")
-    print("0. Exit the program")
-    print("1. Some useful function")
+
+SUMMARY
+'EVENT MANAGER' is a user friendly tool to organize your next athletic event.
 
 
-if __name__ == "__main__":
-    main()
-```
 
-The helper functions are located in `lib/helpers.py`:
+  
 
-```py
-# lib/helpers.py
-
-def helper_1():
-    print("Performing useful function#1.")
-
-
-def exit_program():
-    print("Goodbye!")
-    exit()
-```
-
-You can run the template CLI with `python lib/cli.py`, or include the shebang
-and make it executable with `chmod +x`. The template CLI will ask for input, do
-some work, and accomplish some sort of task.
-
-Past that, CLIs can be whatever you'd like, as long as you follow the project
-requirements.
-
-Of course, you will update `lib/cli.py` with prompts that are appropriate for
-your application, and you will update `lib/helpers.py` to replace `helper_1()`
-with a useful function based on the specific problem domain you decide to
-implement, along with adding other helper functions to the module.
-
-In the `lib/models` folder, you should rename `model_1.py` with the name of a
-data model class from your specific problem domain, and add other classes to the
-folder as needed. The file `lib/models/__init__.py` has been initialized to
-create the necessary database constants. You need to add import statements to
-the various data model classes in order to use the database constants.
-
-You are also welcome to implement a different module and directory structure.
-However, your project should be well organized, modular, and follow the design
-principal of separation of concerns, which means you should separate code
-related to:
-
-- User interface
-- Data persistence
-- Problem domain rules and logic
 
 ---
 
