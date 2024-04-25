@@ -1,10 +1,10 @@
-# EVENT MANAGER READEME
+# EVENT MANAGER README
 
-INTRO
+## INTRO
 
 'EVENT MANAGER' is a Python CLI application created to manage various athletic events and participating athletes. 
 
-USE
+## USE
 
 Users are able to interact with the DB of athletes and events, creating events, and athletes as well as updating 
 exisiting athletes and events. At this time, athletes are only able to participate in one athletic event. Type 
@@ -12,7 +12,7 @@ and distance of event will be listed along with name. Users are able to do view 
 update, add, and remove athletes. Users are also able to view all races, search race by type, view all athletes 
 in specific race, update, add, and remove a race. 
 
-BRIEF WALK THROUGH
+## BRIEF WALK THROUGH
 
 Directory structure is as follows:
 
@@ -36,53 +36,27 @@ Directory structure is as follows:
 
 Upon opening the CLI, users will be greeted with a simple "main menu"
 
+<img width="188" alt="Screen Shot 2024-04-24 at 6 46 30 PM" src="https://github.com/Melindaemackenzie/python-p3-v2-final-project-template/assets/89819551/bac4521c-61ee-49f0-9bad-10a3805e4925">
+
+Users are then prompted to make their selection (1, or 2) to enter the desired menu.
+
+Race Management Menu and Athlete Management Menu are as follows: 
+
+<img width="229" alt="Screen Shot 2024-04-24 at 6 59 26 PM" src="https://github.com/Melindaemackenzie/python-p3-v2-final-project-template/assets/89819551/4e37c2f5-1f95-4d47-a15f-30c977bb5cfd">
+
+
+<img width="255" alt="Screen Shot 2024-04-24 at 7 00 02 PM" src="https://github.com/Melindaemackenzie/python-p3-v2-final-project-template/assets/89819551/9f20c16b-053b-4e6a-8583-f47ab22ddab4">
+
+Users may navigate into either menu based on their selections and follow simple prompts from there to interact with their events and athletes.
+
+
+
+## SUMMARY
+'EVENT MANAGER' is a user friendly tool developed to help to organize your next athletic event.
 
 
 
 
-SUMMARY
-'EVENT MANAGER' is a user friendly tool to organize your next athletic event.
-
-
-
-  
-
-
----
-
-## Updating README.md
-
-`README.md` is a Markdown file that should describe your project. You will
-replace the contents of this `README.md` file with a description of **your**
-actual project.
-
-Markdown is not a language that we cover in Flatiron's Software Engineering
-curriculum, but it's not a particularly difficult language to learn (if you've
-ever left a comment on Reddit, you might already know the basics). Refer to the
-cheat sheet in this assignments's resources for a basic guide to Markdown.
-
-### What Goes into a README?
-
-This README serves as a template. Replace the contents of this file to describe
-the important files in your project and describe what they do. Each Python file
-that you edit should get at least a paragraph, and each function should be
-described with a sentence or two.
-
-Describe your actual CLI script first, and with a good level of detail. The rest
-should be ordered by importance to the user. (Probably functions next, then
-models.)
-
-Screenshots and links to resources that you used throughout are also useful to
-users and collaborators, but a little more syntactically complicated. Only add
-these in if you're feeling comfortable with Markdown.
-
----
-
-## Conclusion
-
-A lot of work goes into a good CLI, but it all relies on concepts that you've
-practiced quite a bit by now. Hopefully this template and guide will get you off
-to a good start with your Phase 3 Project.
 
 Happy coding!
 
