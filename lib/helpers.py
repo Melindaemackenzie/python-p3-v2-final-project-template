@@ -20,7 +20,13 @@ def add_athlete():
         race_name = input("Enter the name of the race to add the athlete to: ")
         race = Race.find_by_name(race_name)
         if race:
-            name = input('Enter athlete name:  ')
+            while True:
+                name = input('Enter athlete name: ')
+                if name.isalpha():
+                    break
+                else:
+                    print("Invalid input. Athlete name must contain only alphabetical characters.")
+            #name = input('Enter athlete name:  ')
             age = int(input('Enter athlete age:  '))
             gender = input('Enter gender; M or F:  ')
             athlete = Athlete.create(name, age, gender, race.id)
@@ -53,6 +59,9 @@ def add_race():
 def find_athlete_by_name():
     print('')
     name = input("Enter name of athlete: ")
+    if not name.isalpha():
+        print("Error: Name should contain only alphabetic characters.")
+        return
     athlete = Athlete.find_by_name(name)
     if athlete:
         print("Athlete found")
@@ -70,16 +79,18 @@ def view_all_races():
 def view_athletes_in_race():
     print('')
     race_name = input("Enter the name of the race: ")
-    race = Race.find_by_name(race_name)
-    
-    if race:
-        athletes = Athlete.get_all(race.id)
-        if athletes:
-            print(f"Athletes participating in race {race_name}:")
-            for athlete in athletes:
-                print(athlete)
-        else:
-            print("No athletes found for the specified race.")
+    #race = Race.find_by_name(race_name)
+    athletes = Athlete.get_all(race_name)
+    #if race:
+    if athletes:
+        print(f"Athletes participating in race {race_name}: ")
+        for athlete in athletes:
+            print(athlete)
+        #athletes = Athlete.get_all(race.id)
+        #if athletes:
+            #print(f"Athletes participating in race {race_name}:")
+            #for athlete in athletes:
+                #print(athlete)
     else:
         print(f"No race found with the name '{race_name}.")
         print("If you'd like to add a race, select '3'.")
@@ -124,10 +135,16 @@ def update_athlete():
     if athlete:
         try:
             new_name = input('Enter the athlete new name: ')
+            if not new_name.isalpha():
+                print("Invalid input. New name must contain only alphabetical characters")
+                return
             athlete.name = new_name
             age = (int(input('Enter the athlete age: ')))
             athlete.age = age
             gender = input('Enter the athlete gender; M or F: ')
+            if gender.upper() not in ['M', 'F']:
+                print("Invalid input. Gender must be 'M' or 'F'.")
+                return
             athlete.gender = gender
             new_race_name = input('Enter the athlete race name: ')
             new_race = Race.find_by_name(new_race_name)
@@ -137,17 +154,16 @@ def update_athlete():
                 print(f'Race {new_race_name} not found.')
                 return
             
-            
-            
-
-
-
             athlete.update()
+            athlete= Athlete.find_by_name(new_name)
             print(f'Success: {athlete}')
+        except ValueError:
+            print('Invalid input for age. Please enter a valid integer')
         except Exception as exc:
-            print('Error updating athlete: ',exc)
+            print('Error updating athlete:', exc)
     else:
-        print(f'Athlete {name} not found')
+        print(f"Athlete with the name '{name}' not found")
+   
 
 def update_race():
         print('')

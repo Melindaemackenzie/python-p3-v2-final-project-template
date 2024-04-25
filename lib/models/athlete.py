@@ -7,13 +7,13 @@ class Athlete:
 
     def __init__(self, name, age, gender, race_id=None, id=None):
         self.id = id
-        self.name = name
-        self.age = age
-        self.gender = gender
+        self._name = name
+        self._age = age
+        self._gender = gender
         self.race_id = race_id
 
     def __repr__(self):
-        return f"<Athlete {self.id}: {self.name}: {self.age}: {self.gender} - {self.race_name}>"
+        return f"<  {self.name}: {self.age}: {self.gender} - {self.race_name}>"
         
        
 
@@ -56,19 +56,7 @@ class Athlete:
                 "Gender must be 'M' or F"
             )
         
-    @property
-    def race_id(self):
-        return self._race_id
-    
-    @race_id.setter
-    def race_id(self, race_id):
-        if isinstance(race_id, int):
-            self._race_id = race_id
-        else:
-            raise ValueError(
-                'Race must be a number'
-            )
-        
+
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of Athlete instances """
@@ -164,18 +152,23 @@ class Athlete:
         return athlete
     
     @classmethod
-    def get_all(cls, race_id=None):
-        if race_id is None:
+    def get_all(cls, race_name=None):
+        if race_name is None:
             sql = """
                 SELECT * FROM athletes
             """
             rows = CURSOR.execute(sql).fetchall()
         else:
-            sql = """
-                SELECT * FROM athletes
-                WHERE race_id = ?
-            """
-            rows = CURSOR.execute(sql, (race_id,)).fetchall()
+            race = Race.find_by_name(race_name)
+            if race:
+                sql = """
+                    SELECT * FROM athletes
+                    WHERE race_id = ?
+                """
+                rows = CURSOR.execute(sql, (race.id,)).fetchall()
+            else:
+                rows = []
+                print('No race found with entered name')
 
         return [cls.instance_from_db(row) for row in rows]
     

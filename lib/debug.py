@@ -20,7 +20,7 @@ jane = Athlete("Jane", 33, "F", 1)
 jane.save()
 
 
-bob = Athlete("Bob", 34, "M", 2)
+bob = Athlete("Bob", 34, "M", 'Half-marathon')
 bob.save()
 
 lisa = Athlete.create("Lisa", 29, "F", 2)
@@ -31,3 +31,4 @@ cameron.age = 32
 cameron.update()
 
 ipdb.set_trace()
+

@@ -13,7 +13,7 @@ class Race:
    
 
     def __repr__(self):
-        return f'<Race {self.id}: {self.name}, {self.race_type}, {self.distance}>'
+        return f'< {self.name}, {self.race_type}, {self.distance}>'
 
 
     @property
